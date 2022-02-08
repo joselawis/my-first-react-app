@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <Header title="Welcome to Codejobs" />
+      <Header title="Welcome to Lawis React App" />
       <Content>
         <Home />
       </Content>

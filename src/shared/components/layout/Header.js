@@ -10,7 +10,7 @@ class Header extends Component{
 
     render(){
         const {
-            title = 'Welcome to React',
+            title = 'Welcome to Lawis React App',
             url = 'http://www.twitch.tv/lawis'
         } = this.props;
 
