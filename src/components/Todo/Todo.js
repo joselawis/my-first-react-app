@@ -12,26 +12,12 @@ class Todo extends Component {
       items: [],
     };
   }
-  componentWillMount() {
-    this.setState({
-      items: [
-        {
-          id: uuidv4(),
-          task: "Pay the rent",
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          task: "Go to gym",
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          task: "Do my homework",
-          completed: false,
-        },
-      ],
-    });
+
+  componentDidMount() {
+    const items = localStorage.getItem("items");
+    if (items) {
+      this.setState({ items: JSON.parse(items) });
+    }
   }
 
   handleOnChange = (e) => {
@@ -48,17 +34,19 @@ class Todo extends Component {
     e.preventDefault();
 
     if (this.state.task.trim() !== "") {
+      const newItem = {
+        id: uuidv4(),
+        task: this.state.task,
+        completed: false,
+      };
       this.setState({
         task: "",
-        items: [
-          ...this.state.items,
-          {
-            id: uuidv4(),
-            task: this.state.task,
-            completed: false,
-          },
-        ],
+        items: [...this.state.items, newItem],
       });
+      localStorage.setItem(
+        "items",
+        JSON.stringify([...this.state.items, newItem])
+      );
     }
   };
 
@@ -68,13 +56,11 @@ class Todo extends Component {
     foundTask.completed = true;
 
     this.setState({
+      task: "",
       ...this.state.items,
       ...foundTask,
     });
-
-    this.setState({
-        task: ""
-    })
+    localStorage.setItem("items", JSON.stringify([...this.state.items]));
   };
 
   removeTask = (id) => {
@@ -83,6 +69,7 @@ class Todo extends Component {
     this.setState({
       items: filteredTasks,
     });
+    localStorage.setItem("items", JSON.stringify(filteredTasks));
   };
 
   render() {
