@@ -10,6 +10,7 @@ class Timer extends Component {
         type: "",
         message: "",
       },
+      duration: 0,
       time: 0,
     };
 
@@ -36,6 +37,7 @@ class Timer extends Component {
         type: "work",
         message: "Working!",
       },
+      duration: this.times.defaultTime,
     });
 
     return this.setTime(this.times.defaultTime);
@@ -47,6 +49,7 @@ class Timer extends Component {
         type: "shortBreak",
         message: "Taking a Short Break!",
       },
+      duration: this.times.shortBreak,
     });
 
     return this.setTime(this.times.shortBreak);
@@ -58,6 +61,7 @@ class Timer extends Component {
         type: "longBreak",
         message: "Taking a Long Break!",
       },
+      duration: this.times.longBreak,
     });
 
     return this.setTime(this.times.longBreak);
@@ -98,6 +102,18 @@ class Timer extends Component {
     return `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
   }
 
+  timerPlay = () => {
+    this.setTime(this.state.time);
+  };
+
+  timerPause = () => {
+    clearInterval(this.interval);
+  };
+
+  timerReset = () => {
+    this.setTime(this.state.duration);
+  };
+
   render() {
     const {
       alert: { message, type },
@@ -107,6 +123,17 @@ class Timer extends Component {
       <div className="Pomodoro">
         <div className={`alert ${type}`}>{message}</div>
         <div className="timer">{this.displayTimer(time)}</div>
+        <div className="control">
+          <button className="play" onClick={this.timerPlay}>
+            Play
+          </button>
+          <button className="play" onClick={this.timerPause}>
+            Pause
+          </button>
+          <button className="play" onClick={this.timerReset}>
+            Reset
+          </button>
+        </div>
         <div className="types">
           <button className="start" onClick={this.setTimeForWork}>
             Start Working
