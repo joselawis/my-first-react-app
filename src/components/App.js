@@ -8,12 +8,14 @@ import Timer from "./Pomodoro/Timer";
 import Coins from "./Coins/Coins";
 import NotesApp from "./Notes/NotesApp";
 import ChartApp from "./Chart/ChartApp";
+import Animation from "./Animation/Animation";
 
 function App() {
   return (
     <div className="App">
       <Header title="Welcome to Lawis React App" />
       <Content>
+        <Animation />
         <ChartApp />
         <NotesApp />
         <Coins />
