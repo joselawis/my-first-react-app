@@ -10,11 +10,11 @@ class Animation extends Component {
     };
   }
 
-  componentWillUpdate(newProps, newState) {
+  componentDidUpdate(newProps, newState) {
     if (!newState.show) {
-      document.getElementById("fade").style = "opacity: 1;";
-    } else {
       document.getElementById("fade").style = "opacity: 0;";
+    } else {
+      document.getElementById("fade").style = "opacity: 1;";
     }
   }
 
