@@ -14,12 +14,12 @@ class Notes extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, state) {
     // Si el prop de notes ha cambiado...
-    if (nextProps.notes !== this.props.notes) {
-      this.setState({
+    if (nextProps.notes !== state.notes) {
+      return {
         lastUpdate: moment().format(formatTime).toString(),
-      });
+      };
     }
   }
 
