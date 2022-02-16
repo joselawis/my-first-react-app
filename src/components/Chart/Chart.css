@@ -1,0 +1,23 @@
+.ChartApp p{
+    text-align: center;
+}
+
+.ChartApp button{
+    background: #159fff;
+    border: none;
+    color: white;
+    margin-left: 1em;
+    padding: 0.5em 2em;
+    text-transform: uppercase;
+    
+}
+
+.ChartApp button:hover {
+    background: darken(#159fff, 5%);
+}
+
+.ChartApp #chart{
+    background: #fff;
+    width: 90%;
+    margin: 1em auto;
+}
