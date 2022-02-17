@@ -9,12 +9,14 @@ import Coins from "./Coins/Coins";
 import NotesApp from "./Notes/NotesApp";
 import ChartApp from "./Chart/ChartApp";
 import Animation from "./Animation/Animation";
+import Numbers from "./Numbers/Numbers";
 
 function App() {
   return (
     <div className="App">
       <Header title="Welcome to Lawis React App" />
       <Content>
+        <Numbers />
         <Animation />
         <ChartApp />
         <NotesApp />
