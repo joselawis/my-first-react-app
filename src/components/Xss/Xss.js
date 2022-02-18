@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import serialize from "serialize-javascript";
 
 // Suponga que esta respuesta procede de un servicio y tiene algún tipo de ataque XSS en su contenido...
 const response = [
@@ -22,7 +23,8 @@ const response = [
 ];
 
 // Suponga que este es el initialState de Redux que se inyecta en el DOM...
-const initialState = JSON.stringify(response);
+const secureInitialState = serialize(response);
+// const insecureInitialState = JSON.stringify(response);
 
 const removeXSSAttacks = (html) => {
   const SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
@@ -43,7 +45,7 @@ const removeXSSAttacks = (html) => {
 class Xss extends Component {
   render() {
     // Analiza la cadena JSON del objeto...
-    const posts = JSON.parse(initialState);
+    const posts = JSON.parse(secureInitialState);
     return (
       <div className="Xss">
         {posts.map((post, key) => (
