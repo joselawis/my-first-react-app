@@ -1,0 +1,18 @@
+.Person {
+  margin: 0 auto;
+}
+
+.Person form input {
+  font-size: 16px;
+  height: 50px;
+  width: 300px;
+}
+
+.Person form button {
+  background: #0072ff;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  height: 50px;
+  width: 300px;
+}
