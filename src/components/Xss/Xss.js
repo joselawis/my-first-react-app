@@ -24,6 +24,22 @@ const response = [
 // Suponga que este es el initialState de Redux que se inyecta en el DOM...
 const initialState = JSON.stringify(response);
 
+const removeXSSAttacks = (html) => {
+  const SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+
+  // Elimine las etiquetas <script>
+  while (SCRIPT_REGEX.test(html)) {
+    html = html.replace(SCRIPT_REGEX, "");
+  }
+
+  // Elimine los eventos de las etiquetas...
+  html = html.replace(/ on\w+="[^"]*"/g, "");
+
+  return {
+    __html: html,
+  };
+};
+
 class Xss extends Component {
   render() {
     // Analiza la cadena JSON del objeto...
@@ -40,7 +56,7 @@ class Xss extends Component {
             <p>
               <strong>Insecure Code:</strong>
             </p>
-            <p dangerouslySetInnerHTML={{ __html: post.content }} />
+            <p dangerouslySetInnerHTML={removeXSSAttacks(post.content)} />
           </div>
         ))}
       </div>
