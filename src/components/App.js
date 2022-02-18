@@ -11,12 +11,14 @@ import ChartApp from "./Chart/ChartApp";
 import Animation from "./Animation/Animation";
 import Numbers from "./Numbers/Numbers";
 import Xss from "./Xss/Xss";
+import Calculator from "./Calculator/Calculator";
 
 function App() {
   return (
     <div className="App">
       <Header title="Welcome to Lawis React App" />
       <Content>
+        <Calculator />
         <Xss />
         <Numbers />
         <Animation />
