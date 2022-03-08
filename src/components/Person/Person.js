@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Popup from "react-popup";
 import "./Person.css";
 
 class Person extends Component {
@@ -39,14 +40,35 @@ class Person extends Component {
         lastName: lastName === "",
       },
     });
-    const data = {
-      firstName,
-      lastName,
-      email,
-      phone,
-    };
 
-    console.log("Data:", data);
+    if (firstName !== "" && lastName !== "" && email !== "") {
+      Popup.create({
+        title: "Personal Information",
+        content: (
+          <div>
+            <p>
+              <strong>Name:</strong> {firstName} {lastName}
+            </p>
+            <p>
+              <strong>Email:</strong> {email}
+            </p>
+            {phone && (
+              <p>
+                <strong>Phone:</strong> {phone}
+              </p>
+            )}
+          </div>
+        ),
+        buttons: {
+          right: [
+            {
+              text: "Close",
+              action: (popup) => popup.close(),
+            },
+          ],
+        },
+      });
+    }
   };
 
   render() {
