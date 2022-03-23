@@ -19,7 +19,8 @@ import Calculator from './Calculator/Calculator';
 import Person from './Person/Person';
 
 function App() {
-  const chapter = 3;
+  const chapter = 4;
+  const section = 'todo';
 
   return (
     <div className="App">
@@ -37,23 +38,23 @@ function App() {
       <Content>
         {chapter === 3 && (
           <div>
-            <Popup />
-            <Person />
-            <Calculator />
+            {section === 'person' && <Popup /> && <Person />}
+            {section === 'calculator' && <Calculator />}
           </div>
         )}
         {chapter === 2 && (
           <div>
-            <Xss />
-            <Numbers />
-            <Animation />
-            <ChartApp />
-            <NotesApp />
-            <Coins />
-            <Timer />
-            <Todo />
+            {section === 'xss' && <Xss />}
+            {section === 'numbers' && <Numbers />}
+            {section === 'animation' && <Animation />}
+            {section === 'chart' && <ChartApp />}
+            {section === 'notes' && <NotesApp />}
+            {section === 'coins' && <Coins />}
+            {section === 'timer' && <Timer />}
+            {section === 'todo' && <Todo />}
           </div>
         )}
+        {chapter === 4}
       </Content>
       <Footer />
     </div>
