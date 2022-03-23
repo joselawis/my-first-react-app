@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Timer.css";
+import React, { Component } from 'react';
+import './Timer.css';
 
 class Timer extends Component {
   constructor() {
@@ -7,8 +7,8 @@ class Timer extends Component {
 
     this.state = {
       alert: {
-        type: "",
-        message: "",
+        type: '',
+        message: '',
       },
       duration: 0,
       time: 0,
@@ -34,8 +34,8 @@ class Timer extends Component {
   setTimeForWork = () => {
     this.setState({
       alert: {
-        type: "work",
-        message: "Working!",
+        type: 'work',
+        message: 'Working!',
       },
       duration: this.times.defaultTime,
     });
@@ -46,8 +46,8 @@ class Timer extends Component {
   setTimeForShortBreak = () => {
     this.setState({
       alert: {
-        type: "shortBreak",
-        message: "Taking a Short Break!",
+        type: 'shortBreak',
+        message: 'Taking a Short Break!',
       },
       duration: this.times.shortBreak,
     });
@@ -58,8 +58,8 @@ class Timer extends Component {
   setTimeForLongBreak = () => {
     this.setState({
       alert: {
-        type: "longBreak",
-        message: "Taking a Long Break!",
+        type: 'longBreak',
+        message: 'Taking a Long Break!',
       },
       duration: this.times.longBreak,
     });
@@ -82,28 +82,25 @@ class Timer extends Component {
   };
 
   countDown = () => {
-    if (this.state.time === 0) {
+    const { time } = this.state;
+
+    if (time === 0) {
       this.setState({
         alert: {
-          type: "buz",
-          message: "Buzzzzzzzz!",
+          type: 'buz',
+          message: 'Buzzzzzzzz!',
         },
       });
     } else {
       this.setState({
-        time: this.state.time - 1,
+        time: time - 1,
       });
     }
   };
 
-  displayTimer(seconds) {
-    const m = Math.floor((seconds % 3600) / 60);
-    const s = Math.floor((seconds % 3600) % 60);
-    return `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
-  }
-
   timerPlay = () => {
-    this.setTime(this.state.time);
+    const { time } = this.state;
+    this.setTime(time);
   };
 
   timerPause = () => {
@@ -111,8 +108,15 @@ class Timer extends Component {
   };
 
   timerReset = () => {
-    this.setTime(this.state.duration);
+    const { duration } = this.state;
+    this.setTime(duration);
   };
+
+  displayTimer() {
+    const m = Math.floor((this.seconds % 3600) / 60);
+    const s = Math.floor((this.seconds % 3600) % 60);
+    return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+  }
 
   render() {
     const {
@@ -124,24 +128,32 @@ class Timer extends Component {
         <div className={`alert ${type}`}>{message}</div>
         <div className="timer">{this.displayTimer(time)}</div>
         <div className="control">
-          <button className="play" onClick={this.timerPlay}>
+          <button className="play" type="button" onClick={this.timerPlay}>
             Play
           </button>
-          <button className="play" onClick={this.timerPause}>
+          <button className="play" type="button" onClick={this.timerPause}>
             Pause
           </button>
-          <button className="play" onClick={this.timerReset}>
+          <button className="play" type="button" onClick={this.timerReset}>
             Reset
           </button>
         </div>
         <div className="types">
-          <button className="start" onClick={this.setTimeForWork}>
+          <button className="start" type="button" onClick={this.setTimeForWork}>
             Start Working
           </button>
-          <button className="short" onClick={this.setTimeForShortBreak}>
+          <button
+            className="short"
+            type="button"
+            onClick={this.setTimeForShortBreak}
+          >
             Short Break
           </button>
-          <button className="long" onClick={this.setTimeForLongBreak}>
+          <button
+            className="long"
+            type="button"
+            onClick={this.setTimeForLongBreak}
+          >
             Long Break
           </button>
         </div>

@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import logo from "../../images/logo.svg";
+import React from 'react';
+import PropTypes from 'prop-types';
+import logo from '../../images/logo.svg';
 
-const Header = (props) => {
+function Header(props) {
   const {
-    title = "Welcome to Lawis React App",
-    url = "http://www.twitch.tv/lawis",
+    title = 'Welcome to Lawis React App',
+    url = 'http://www.twitch.tv/lawis',
   } = props;
 
   return (
@@ -16,7 +16,7 @@ const Header = (props) => {
       <h1 className="App-title">{title}</h1>
     </header>
   );
-};
+}
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,

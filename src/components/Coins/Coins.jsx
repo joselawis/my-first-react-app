@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Coins.css";
+import React, { Component } from 'react';
+import './Coins.css';
 
 class Coins extends Component {
   constructor() {
@@ -22,6 +22,7 @@ class Coins extends Component {
   };
 
   render() {
+    const { dollars } = this.state;
     return (
       <div className="Coins">
         <h1>Buy Crypto Coins!</h1>
@@ -34,7 +35,7 @@ class Coins extends Component {
         <div className="answer">
           <p>Crypto coin price: $10</p>
           <p>
-            You can buy <strong>{this.state.dollars / 10}</strong> coins.
+            You can buy <strong>{dollars / 10}</strong> coins.
           </p>
         </div>
       </div>

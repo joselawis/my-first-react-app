@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import Popup from "react-popup";
-import "./Person.css";
+import React, { Component } from 'react';
+import Popup from 'react-popup';
+import './Person.css';
 
 class Person extends Component {
   constructor() {
     super();
 
     this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
       errors: {
         firstName: false,
         lastName: false,
@@ -29,21 +29,22 @@ class Person extends Component {
   };
 
   handleOnSubmit = (e) => {
-    // El método e.preventDefault() cancela el evento si este es cancelable, por lo ue la acción predeterminada que pertenece al evento, no se producirá.
+    // El método e.preventDefault() cancela el evento si este es cancelable,
+    // por lo que la acción predeterminada que pertenece al evento, no se producirá.
     e.preventDefault();
 
     const { firstName, lastName, email, phone } = this.state;
 
     this.setState({
       errors: {
-        firstName: firstName === "",
-        lastName: lastName === "",
+        firstName: firstName === '',
+        lastName: lastName === '',
       },
     });
 
-    if (firstName !== "" && lastName !== "" && email !== "") {
+    if (firstName !== '' && lastName !== '' && email !== '') {
       Popup.create({
-        title: "Personal Information",
+        title: 'Personal Information',
         content: (
           <div>
             <p>
@@ -62,7 +63,7 @@ class Person extends Component {
         buttons: {
           right: [
             {
-              text: "Close",
+              text: 'Close',
               action: (popup) => popup.close(),
             },
           ],
@@ -72,6 +73,8 @@ class Person extends Component {
   };
 
   render() {
+    const { firstName, lastName, email, phone, errors } = this.state;
+
     return (
       <div className="Person">
         <form onSubmit={this.handleOnSubmit}>
@@ -82,11 +85,11 @@ class Person extends Component {
             <input
               name="firstName"
               type="text"
-              value={this.state.firstName}
+              value={firstName}
               onChange={this.handleOnChange}
-              className={this.state.errors.firstName ? "error" : ""}
+              className={errors.firstName ? 'error' : ''}
             />
-            {this.state.errors.firstName && (
+            {errors.firstName && (
               <div className="errorMessage">Campo obligatorio</div>
             )}
           </div>
@@ -97,11 +100,11 @@ class Person extends Component {
             <input
               name="lastName"
               type="text"
-              value={this.state.lastName}
+              value={lastName}
               onChange={this.handleOnChange}
-              className={this.state.errors.lastName ? "error" : ""}
+              className={errors.lastName ? 'error' : ''}
             />
-            {this.state.errors.lastName && (
+            {errors.lastName && (
               <div className="errorMessage">Campo obligatorio</div>
             )}
           </div>
@@ -113,7 +116,7 @@ class Person extends Component {
               <input
                 name="email"
                 type="email"
-                value={this.state.email}
+                value={email}
                 onChange={this.handleOnChange}
               />
             </p>
@@ -126,14 +129,13 @@ class Person extends Component {
               <input
                 name="phone"
                 type="tel"
-                value={this.state.phone}
+                value={phone}
                 onChange={this.handleOnChange}
               />
             </p>
           </div>
-          <p>
-            <button>Save Information</button>
-          </p>
+
+          <button type="submit">Save Information</button>
         </form>
       </div>
     );

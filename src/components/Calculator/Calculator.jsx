@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Calculator.css";
+import React, { Component } from 'react';
+import './Calculator.css';
 
 class Calculator extends Component {
   constructor() {
@@ -22,32 +22,35 @@ class Calculator extends Component {
     });
   };
 
-  handleResult = (e) => {
-    this.setState({
-      result: this.state.number1 + this.state.number2,
-    });
+  handleResult = () => {
+    this.setState((prevState) => ({
+      result: prevState.number1 + prevState.number2,
+    }));
   };
 
   render() {
+    const { number1, number2, result } = this.state;
     return (
       <div className="Calculator">
         <input
           onChange={this.handleOnChange}
           name="number1"
           type="text"
-          value={this.state.number1}
+          value={number1}
         />
-        {" + "}
+        {' + '}
         <input
           onChange={this.handleOnChange}
           name="number2"
           type="text"
-          value={this.state.number2}
+          value={number2}
         />
         <p>
-          <button onClick={this.handleResult}>=</button>
+          <button type="button" onClick={this.handleResult}>
+            =
+          </button>
         </p>
-        <p className="result">{this.state.result}</p>
+        <p className="result">{result}</p>
       </div>
     );
   }

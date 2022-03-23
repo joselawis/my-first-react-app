@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
-import List from "../List/List";
-import "./Todo.css";
+import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import List from '../List/List';
+import './Todo.css';
 
 class Todo extends Component {
   constructor() {
     super();
 
     this.state = {
-      task: "",
+      task: '',
       items: [],
     };
   }
 
   componentDidMount() {
-    const items = localStorage.getItem("items");
+    const items = localStorage.getItem('items');
     if (items) {
       this.setState({ items: JSON.parse(items) });
     }
@@ -31,56 +31,61 @@ class Todo extends Component {
   };
 
   handleOnSubmit = (e) => {
+    const { task, items } = this.state;
+
     e.preventDefault();
 
-    if (this.state.task.trim() !== "") {
+    if (task.trim() !== '') {
       const newItem = {
         id: uuidv4(),
-        task: this.state.task,
+        task,
         completed: false,
       };
       this.setState({
-        task: "",
-        items: [...this.state.items, newItem],
+        task: '',
+        items: [...items, newItem],
       });
-      localStorage.setItem(
-        "items",
-        JSON.stringify([...this.state.items, newItem])
-      );
+      localStorage.setItem('items', JSON.stringify([...items, newItem]));
     }
   };
 
   markAsCompleted = (id) => {
-    const foundTask = this.state.items.find((task) => task.id === id);
+    const { items } = this.state;
+
+    const foundTask = items.find((task) => task.id === id);
 
     foundTask.completed = true;
 
     this.setState({
-      task: "",
-      ...this.state.items,
+      task: '',
+      ...items,
       ...foundTask,
     });
-    localStorage.setItem("items", JSON.stringify([...this.state.items]));
+    localStorage.setItem('items', JSON.stringify([...items]));
   };
 
   removeTask = (id) => {
-    const filteredTasks = this.state.items.filter((task) => task.id !== id);
+    const { items } = this.state;
+
+    const filteredTasks = items.filter((task) => task.id !== id);
 
     this.setState({
       items: filteredTasks,
     });
-    localStorage.setItem("items", JSON.stringify(filteredTasks));
+    localStorage.setItem('items', JSON.stringify(filteredTasks));
   };
 
   render() {
+    const { task, items } = this.state;
+
     return (
       <div className="Todo">
         <h1>New Task:</h1>
         <form onSubmit={this.handleOnSubmit}>
-          <input value={this.state.task} onChange={this.handleOnChange} />
+          <input value={task} onChange={this.handleOnChange} />
         </form>
         <List
-          items={this.state.items}
+          items={items}
           markAsCompleted={this.markAsCompleted}
           removeTask={this.removeTask}
         />

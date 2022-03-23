@@ -1,10 +1,13 @@
-import React, { Component } from "react";
-import "./Numbers.css";
+import React, { Component } from 'react';
+import './Numbers.css';
 
-import Result from "./Result";
+import Result from './Result';
 
 class Numbers extends Component {
-  state = { numbers: "", results: [] };
+  constructor() {
+    super();
+    this.state = { numbers: '', results: [] };
+  }
 
   handleNumberChange = (e) => {
     const {
@@ -15,23 +18,25 @@ class Numbers extends Component {
 
     const result = numbers.reduce((a, b) => Number(a) + Number(b), 0);
 
-    this.setState({
+    this.setState((prevState) => ({
       numbers: value,
-      results: [...this.state.results, result],
-    });
+      results: [...prevState.results, result],
+    }));
   };
 
   render() {
+    const { numbers, results } = this.state;
+
     return (
       <div className="Numbers">
         <input
           type="number"
-          value={this.state.numbers}
+          value={numbers}
           onChange={this.handleNumberChange}
         />
         <ul>
-          {this.state.results.map((result, i) => (
-            <Result key={i} result={result} />
+          {results.map((result) => (
+            <Result key={result.id} result={result} />
           ))}
         </ul>
       </div>
