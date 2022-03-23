@@ -1,5 +1,6 @@
 import Popup from 'react-popup';
 import React from 'react';
+import Helmet from 'react-helmet';
 import Header from '../shared/components/layout/Header';
 import Content from '../shared/components/layout/Content';
 import Footer from '../shared/components/layout/Footer';
@@ -22,6 +23,16 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet
+        title="Person Information"
+        meta={[
+          { name: 'title', content: 'Person Information' },
+          {
+            name: 'description',
+            content: 'This recipe talks about React Helmet',
+          },
+        ]}
+      />
       <Header title="Welcome to Lawis React App" />
       <Content>
         {chapter === 3 && (
